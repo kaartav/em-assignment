@@ -13,6 +13,8 @@ agecalc <- function(num) {
     return(12+num*5)
 }
 raw_data <- drop_na(raw_data)
+
+#add age col
 raw_data$"Age of Mother" <- agecalc(raw_data$`Age in 5-year groups`)
 
 #add prenatal care col
