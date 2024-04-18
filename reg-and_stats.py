@@ -2,6 +2,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score
 from sklearn.model_selection import train_test_split
 import numpy as np
+import pandas as pd
 import statsmodels.api as sm
 
 def evaluate_model(y_true, y_pred):
@@ -48,3 +49,7 @@ def logistic_regression_model(df, dep_variable, test_size=0.2, random_state=42):
     t_test_results = result.t_test()
 
     return logistic_regression_model, evaluation_metrics, coefficients, variance_coefficients, t_test_results
+df=pd.read_csv('data/FINAL_FINAL_data.xlsx')
+regression_model_child, evaluation_metrics_child, coefficients_child, variance_coefficients_child, t_test_results_child=logistic_regression_model(df,"Child is alive")
+regression_model_PrenatalCare, evaluation_metrics_PrenatalCare, coefficients_PrenatalCare, variance_coefficients_PrenatalCare, t_test_results_PrenatalCare=logistic_regression_model(df,"PrenatalCare")
+regression_model_Hospital,evaluation_metrics_Hospital, coefficients_Hospital, variance_coefficients_Hospital, t_test_results_Hospital=logistic_regression_model(df,"Hospital delivery")
