@@ -18,9 +18,7 @@ raw_data$"Age of Mother" <- agecalc(raw_data$`Age in 5-year groups`)
 
 #add prenatal care col
 raw_data$"PrenatalCare" <- ifelse(
-    (raw_data$"Prenatal: doctor"|| raw_data$"Prenatal: ANM/nurse/midwife/LHV"||
-    raw_data$"Prenatal: other health personnel"|| raw_data$"Prenatal: anganwadi/ICDS worker"||
-    raw_data$"Prenatal: DAI/TBA"), 1, 0
+    (raw_data$"Prenatal: doctor"==1), 1, 0
 )
 
 #add low, med, high standards of living
@@ -30,9 +28,7 @@ raw_data$"Std of Living (High)" <- ifelse(raw_data$"Standard of Living Index" ==
 
 #add allowed to go
 raw_data$"allowed to go alone" <- ifelse(
-    (raw_data$"Allowed to go to: market" == 1 || 
-    raw_data$"Allowed to go to: places outside this village/community" == 1 || 
-    raw_data$"Allowed to go to: health facility" == 1),
+    (raw_data$"Allowed to go to: health facility" == 1),
     1, 0
 )
 
@@ -45,12 +41,12 @@ raw_data$"Religion (Other)" <- ifelse(raw_data$Religion %in% c(1, 2, 3), 1, 0)
 # add partner's occu
 raw_data$"Partner's Occupation (Agri, household & domestic)" <- ifelse(raw_data$"Partner's occupation" %in% c(4,5,6), 1, 0)
 raw_data$"Partner's Occupation (Professional, clerical, sales & service)" <- ifelse(raw_data$"Partner's occupation" %in% c(1,2,3,7), 1, 0)
-raw_data$"Partner's Occupation (Agri, household & domestic)" <- ifelse(raw_data$"Partner's occupation" %in% c(8), 1, 0)
+raw_data$"Partner's Occupation (Manual)" <- ifelse(raw_data$"Partner's occupation" %in% c(8), 1, 0)
 
 # add respondent's occu
 raw_data$"Respondent's Occupation (Agri, household & domestic)" <- ifelse(raw_data$"Respondent's occupation" %in% c(4,5,6), 1, 0)
 raw_data$"Respondent's Occupation (Professional, clerical, sales & service)" <- ifelse(raw_data$"Respondent's occupation" %in% c(1,2,3,7), 1, 0)
-raw_data$"Respondent's Occupation (Agri, household & domestic)" <- ifelse(raw_data$"Respondent's occupation" %in% c(8), 1, 0)
+raw_data$"Respondent's Occupation (Manual)" <- ifelse(raw_data$"Respondent's occupation" %in% c(8), 1, 0)
 
 # add place of residence
 raw_data$"Place of Residence (Urban)" <- ifelse(raw_data$"Type of place of residence" == 1, 1, 0)
