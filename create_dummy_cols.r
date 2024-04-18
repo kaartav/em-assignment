@@ -72,7 +72,7 @@ raw_data$"Partner's Educational level (Primary)" <- ifelse(raw_data$"Partner's e
 raw_data$"Partner's Educational level (Secondary)" <- ifelse(raw_data$"Partner's education level" == 2, 1, 0)
 raw_data$"Partner's Education level (High)" <- ifelse(raw_data$"Partner's education level" == 3, 1, 0)
 
-# add hospital delivery
+# add hospital delivaryjkxfgujkzdhngzduj
 raw_data$"Hospital delivery" <- ifelse(raw_data$"Place of delivery" %in% c(20, 21, 22, 24, 25, 30, 31, 36, 41), 1, 0)
 
 str(raw_data)
