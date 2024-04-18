@@ -5,8 +5,6 @@ library("tidyr")
 library("magrittr")
 library("writexl")
 
-df_with_dummies <- data.frame()
-
 raw_data <- read_excel("data/regression_data_final.xlsx", sheet=1, col_names=TRUE)
 
 #raw_data <- drop_na(raw_data)
@@ -31,8 +29,10 @@ raw_data$"Std of Living (Med)" <- ifelse(raw_data$"Standard of Living Index" == 
 raw_data$"Std of Living (High)" <- ifelse(raw_data$"Standard of Living Index" == 3, 1, 0)
 
 #add allowed to go
-raw_data$"allowed to go" <- ifelse(
-    (raw_data$"Allowed to go to: market" == 1 || raw_data$"Allowed to go to: market" == 2),
+raw_data$"allowed to go alone" <- ifelse(
+    (raw_data$"Allowed to go to: market" == 1 || 
+    raw_data$"Allowed to go to: places outside this village/community" == 1 || 
+    raw_data$"Allowed to go to: health facility" == 1),
     1, 0
 )
 
@@ -57,12 +57,12 @@ raw_data$"Place of Residence (Urban)" <- ifelse(raw_data$"Type of place of resid
 raw_data$"Place of Residence (Rural)" <- ifelse(raw_data$"Type of place of residence" == 2, 1, 0)
 
 # add has money for own use
-raw_data$"Has money for her own use" <- if (raw_data$"Has money for her own use" != 1 && raw_data$"Has money for her own use" != 0) {
+raw_data$"Has money for own use" <- if (raw_data$"Has money for her own use" != 1 && raw_data$"Has money for her own use" != 0) {
     raw_data$"Has money for her own use" = 0
 }
 
 # add pregnancy complications
-raw_data$"Told about pregnancy complications" <- if (raw_data$"Told about pregnancy complications" != 1 && raw_data$"Told about pregnancy complications" != 0) {
+raw_data$"Pregnancy Complications" <- if (raw_data$"Told about pregnancy complications" != 1 && raw_data$"Told about pregnancy complications" != 0) {
     raw_data$"Told about pregnancy complications" = 0
 }
 
@@ -81,6 +81,4 @@ raw_data$"Hospital delivery" <- ifelse(raw_data$"Place of delivery" %in% c(20, 2
 str(raw_data)
 
 write_xlsx(raw_data, "data/regression_data_final_dummies_combined.xlsx", col_names=TRUE)
-
-
 
