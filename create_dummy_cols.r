@@ -3,16 +3,19 @@ library("readxl")
 library("dplyr")
 library("tidyr")
 library("magrittr")
+library("writexl")
 
 df_with_dummies <- data.frame()
 
 raw_data <- read_excel("data/regression_data_final.xlsx", sheet=1, col_names=TRUE)
 
+#raw_data <- drop_na(raw_data)
+
 #add Age of Mother col
 agecalc <- function(num) {
     return(12+num*5)
 }
-raw_data <- drop_na(raw_data)
+
 raw_data$"Age of Mother" <- agecalc(raw_data$`Age in 5-year groups`)
 
 #add prenatal care col
@@ -77,6 +80,7 @@ raw_data$"Hospital delivery" <- ifelse(raw_data$"Place of delivery" %in% c(20, 2
 
 str(raw_data)
 
+write_xlsx(raw_data, "data/regression_data_final_dummies_combined.xlsx", col_names=TRUE)
 
 
 
