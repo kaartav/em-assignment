@@ -49,7 +49,8 @@ def logistic_regression_model(df, dep_variable, test_size=0.2, random_state=42):
     t_test_results = result.t_test()
 
     return logistic_regression_model, evaluation_metrics, coefficients, variance_coefficients, t_test_results
-df=pd.read_csv('data/FINAL_FINAL_data.xlsx')
+df = pd.read_csv('./FINAL_FINAL_data.xlsx', encoding='latin1')
+
 regression_model_child, evaluation_metrics_child, coefficients_child, variance_coefficients_child, t_test_results_child=logistic_regression_model(df,"Child is alive")
 regression_model_PrenatalCare, evaluation_metrics_PrenatalCare, coefficients_PrenatalCare, variance_coefficients_PrenatalCare, t_test_results_PrenatalCare=logistic_regression_model(df,"PrenatalCare")
 regression_model_Hospital,evaluation_metrics_Hospital, coefficients_Hospital, variance_coefficients_Hospital, t_test_results_Hospital=logistic_regression_model(df,"Hospital delivery")
