@@ -13,31 +13,57 @@ names(dataset) <- c("CM", "pregcomplication", "hasmoneyforownuse", "motherAge", 
 dataset <- drop_na(dataset)
 #str(dataset)
 
-# fitting binomial regression models
+# fitting binomial regression probit models
 PC_probit <- 
 glm(PC ~ Residence_urban + motherAge + ReligionMuslim + ReligionChristian + ReligionOther +
     LivingStdMed + LivingStdHigh + PartnerOcc_manual + PartnerOcc_agri_household_domes +
     PartnerOcc_prof_cler_sales_service + allowedtogo + hasmoneyforownuse + pregcomplication +
     MotherEduPrimary + MotherEduSecondary + PartnerEduPrimary + PartnerEduSecondary + PartnerEduHigh, 
-    data=dataset)
+    data=dataset, family=binomial(link="probit"))
 
 HD_probit <-
 glm(HD ~ Residence_urban + motherAge + ReligionMuslim + ReligionChristian + ReligionOther +
     LivingStdMed + LivingStdHigh + PartnerOcc_manual + PartnerOcc_agri_household_domes +
     PartnerOcc_prof_cler_sales_service + allowedtogo + hasmoneyforownuse + pregcomplication +
     MotherEduPrimary + MotherEduSecondary + PartnerEduPrimary + PartnerEduSecondary + PartnerEduHigh + PC,
-    data=dataset)
+    data=dataset, family=binomial(link="probit"))
 
 CM_probit <- 
 glm(CM ~ Residence_urban + motherAge + ReligionMuslim + ReligionChristian + ReligionOther +
     LivingStdMed + LivingStdHigh + PartnerOcc_manual + PartnerOcc_agri_household_domes +
     PartnerOcc_prof_cler_sales_service + allowedtogo + hasmoneyforownuse + pregcomplication +
     MotherEduPrimary + MotherEduSecondary + PartnerEduPrimary + PartnerEduSecondary + PartnerEduHigh + PC + HD,
-    data=dataset)
+    data=dataset, family=binomial(link="probit"))
+
+#fitting binomial logit models
+PC_logit <- 
+glm(PC ~ Residence_urban + motherAge + ReligionMuslim + ReligionChristian + ReligionOther +
+    LivingStdMed + LivingStdHigh + PartnerOcc_manual + PartnerOcc_agri_household_domes +
+    PartnerOcc_prof_cler_sales_service + allowedtogo + hasmoneyforownuse + pregcomplication +
+    MotherEduPrimary + MotherEduSecondary + PartnerEduPrimary + PartnerEduSecondary + PartnerEduHigh, 
+    data=dataset, family=binomial(link="logit"))
+
+HD_logit <-
+glm(HD ~ Residence_urban + motherAge + ReligionMuslim + ReligionChristian + ReligionOther +
+    LivingStdMed + LivingStdHigh + PartnerOcc_manual + PartnerOcc_agri_household_domes +
+    PartnerOcc_prof_cler_sales_service + allowedtogo + hasmoneyforownuse + pregcomplication +
+    MotherEduPrimary + MotherEduSecondary + PartnerEduPrimary + PartnerEduSecondary + PartnerEduHigh + PC,
+    data=dataset, family=binomial(link="logit"))
+
+CM_logit <- 
+glm(CM ~ Residence_urban + motherAge + ReligionMuslim + ReligionChristian + ReligionOther +
+    LivingStdMed + LivingStdHigh + PartnerOcc_manual + PartnerOcc_agri_household_domes +
+    PartnerOcc_prof_cler_sales_service + allowedtogo + hasmoneyforownuse + pregcomplication +
+    MotherEduPrimary + MotherEduSecondary + PartnerEduPrimary + PartnerEduSecondary + PartnerEduHigh + PC + HD,
+    data=dataset, family=binomial(link="logit"))
 
 # fitting heteroskedastic regression models
 PC_hetprobit <-
 hetprob(PC ~ Residence_urban + motherAge + ReligionMuslim + ReligionChristian + ReligionOther +
+    LivingStdMed + LivingStdHigh + PartnerOcc_manual + PartnerOcc_agri_household_domes +
+    PartnerOcc_prof_cler_sales_service + allowedtogo + hasmoneyforownuse + pregcomplication +
+    MotherEduPrimary + MotherEduSecondary + PartnerEduPrimary + PartnerEduSecondary + PartnerEduHigh | 
+    Residence_urban + motherAge + ReligionMuslim + ReligionChristian + ReligionOther +
     LivingStdMed + LivingStdHigh + PartnerOcc_manual + PartnerOcc_agri_household_domes +
     PartnerOcc_prof_cler_sales_service + allowedtogo + hasmoneyforownuse + pregcomplication +
     MotherEduPrimary + MotherEduSecondary + PartnerEduPrimary + PartnerEduSecondary + PartnerEduHigh, 
@@ -47,11 +73,19 @@ HD_hetprobit <-
 hetprob(HD ~ Residence_urban + motherAge + ReligionMuslim + ReligionChristian + ReligionOther +
     LivingStdMed + LivingStdHigh + PartnerOcc_manual + PartnerOcc_agri_household_domes +
     PartnerOcc_prof_cler_sales_service + allowedtogo + hasmoneyforownuse + pregcomplication +
+    MotherEduPrimary + MotherEduSecondary + PartnerEduPrimary + PartnerEduSecondary + PartnerEduHigh + PC |
+    Residence_urban + motherAge + ReligionMuslim + ReligionChristian + ReligionOther +
+    LivingStdMed + LivingStdHigh + PartnerOcc_manual + PartnerOcc_agri_household_domes +
+    PartnerOcc_prof_cler_sales_service + allowedtogo + hasmoneyforownuse + pregcomplication +
     MotherEduPrimary + MotherEduSecondary + PartnerEduPrimary + PartnerEduSecondary + PartnerEduHigh + PC,
     data=dataset, link="probit")
 
 CM_hetprobit <- 
 hetprob(CM ~ Residence_urban + motherAge + ReligionMuslim + ReligionChristian + ReligionOther +
+    LivingStdMed + LivingStdHigh + PartnerOcc_manual + PartnerOcc_agri_household_domes +
+    PartnerOcc_prof_cler_sales_service + allowedtogo + hasmoneyforownuse + pregcomplication +
+    MotherEduPrimary + MotherEduSecondary + PartnerEduPrimary + PartnerEduSecondary + PartnerEduHigh + PC + HD |
+    Residence_urban + motherAge + ReligionMuslim + ReligionChristian + ReligionOther +
     LivingStdMed + LivingStdHigh + PartnerOcc_manual + PartnerOcc_agri_household_domes +
     PartnerOcc_prof_cler_sales_service + allowedtogo + hasmoneyforownuse + pregcomplication +
     MotherEduPrimary + MotherEduSecondary + PartnerEduPrimary + PartnerEduSecondary + PartnerEduHigh + PC + HD, 
