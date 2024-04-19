@@ -19,21 +19,21 @@ glm(PC ~ Residence_urban + motherAge + ReligionMuslim + ReligionChristian + Reli
     LivingStdMed + LivingStdHigh + PartnerOcc_manual + PartnerOcc_agri_household_domes +
     PartnerOcc_prof_cler_sales_service + allowedtogo + hasmoneyforownuse + pregcomplication +
     MotherEduPrimary + MotherEduSecondary + PartnerEduPrimary + PartnerEduSecondary + PartnerEduHigh, 
-    data=dataset, family=binomial(link="probit"))
+    data=dataset, family=binomial(link="probit"), x=TRUE)
 
 HD_probit <-
 glm(HD ~ Residence_urban + motherAge + ReligionMuslim + ReligionChristian + ReligionOther +
     LivingStdMed + LivingStdHigh + PartnerOcc_manual + PartnerOcc_agri_household_domes +
     PartnerOcc_prof_cler_sales_service + allowedtogo + hasmoneyforownuse + pregcomplication +
     MotherEduPrimary + MotherEduSecondary + PartnerEduPrimary + PartnerEduSecondary + PartnerEduHigh + PC,
-    data=dataset, family=binomial(link="probit"))
+    data=dataset, family=binomial(link="probit"), x=TRUE)
 
 CM_probit <- 
 glm(CM ~ Residence_urban + motherAge + ReligionMuslim + ReligionChristian + ReligionOther +
     LivingStdMed + LivingStdHigh + PartnerOcc_manual + PartnerOcc_agri_household_domes +
     PartnerOcc_prof_cler_sales_service + allowedtogo + hasmoneyforownuse + pregcomplication +
     MotherEduPrimary + MotherEduSecondary + PartnerEduPrimary + PartnerEduSecondary + PartnerEduHigh + PC + HD,
-    data=dataset, family=binomial(link="probit"))
+    data=dataset, family=binomial(link="probit"), x=TRUE)
 
 #fitting binomial logit models
 PC_logit <- 
@@ -41,21 +41,21 @@ glm(PC ~ Residence_urban + motherAge + ReligionMuslim + ReligionChristian + Reli
     LivingStdMed + LivingStdHigh + PartnerOcc_manual + PartnerOcc_agri_household_domes +
     PartnerOcc_prof_cler_sales_service + allowedtogo + hasmoneyforownuse + pregcomplication +
     MotherEduPrimary + MotherEduSecondary + PartnerEduPrimary + PartnerEduSecondary + PartnerEduHigh, 
-    data=dataset, family=binomial(link="logit"))
+    data=dataset, family=binomial(link="logit"), x=TRUE)
 
 HD_logit <-
 glm(HD ~ Residence_urban + motherAge + ReligionMuslim + ReligionChristian + ReligionOther +
     LivingStdMed + LivingStdHigh + PartnerOcc_manual + PartnerOcc_agri_household_domes +
     PartnerOcc_prof_cler_sales_service + allowedtogo + hasmoneyforownuse + pregcomplication +
     MotherEduPrimary + MotherEduSecondary + PartnerEduPrimary + PartnerEduSecondary + PartnerEduHigh + PC,
-    data=dataset, family=binomial(link="logit"))
+    data=dataset, family=binomial(link="logit"),x=TRUE)
 
 CM_logit <- 
 glm(CM ~ Residence_urban + motherAge + ReligionMuslim + ReligionChristian + ReligionOther +
     LivingStdMed + LivingStdHigh + PartnerOcc_manual + PartnerOcc_agri_household_domes +
     PartnerOcc_prof_cler_sales_service + allowedtogo + hasmoneyforownuse + pregcomplication +
     MotherEduPrimary + MotherEduSecondary + PartnerEduPrimary + PartnerEduSecondary + PartnerEduHigh + PC + HD,
-    data=dataset, family=binomial(link="logit"))
+    data=dataset, family=binomial(link="logit"), x=TRUE)
 
 # fitting heteroskedastic regression models
 PC_hetprobit <-
